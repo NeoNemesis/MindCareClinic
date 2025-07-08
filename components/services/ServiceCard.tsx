@@ -40,13 +40,28 @@ const iconMap: { [key: string]: React.ElementType } = {
   'podologia': Footprints,
 }
 
+// Mapeo de URLs de páginas individuales por servicio
+const serviceUrlMap: { [key: string]: string } = {
+  'psicologia': '/servicios/psicologia-domicilio-vina-del-mar',
+  'kinesiologia': '/servicios/kinesiologia-domicilio-vina-del-mar',
+  'nutricion': '/servicios/nutricion-domicilio-vina-del-mar',
+  'terapia-ocupacional': '/servicios/terapia-ocupacional-domicilio-vina-del-mar',
+  'tens': '/servicios/tens-domicilio-vina-del-mar',
+  'cuidadora': '/servicios/cuidadora-domicilio-vina-del-mar',
+  'enfermeria': '/servicios/enfermeria-domicilio-vina-del-mar',
+  'fonoaudiologia': '/servicios/fonoaudiologia-domicilio-vina-del-mar',
+  'psicopedagogia': '/servicios/psicopedagogia-domicilio-vina-del-mar',
+  'podologia': '/servicios/podologia-domicilio-vina-del-mar',
+}
+
 const ServiceCard: React.FC<ServiceCardProps> = ({ service, variant = 'default', showImage = true }) => {
   const Icon = iconMap[service.id] || Heart
   const serviceImage = getServiceImage(service.id)
+  const serviceUrl = serviceUrlMap[service.id] || `/servicios#${service.id}`
 
   if (variant === 'compact') {
     return (
-      <Link href={`/servicios#${service.id}`} className="block group">
+      <Link href={serviceUrl} className="block group">
         <Card className="h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-gray-200">
           {showImage && (
             <div className="relative h-48 overflow-hidden rounded-t-lg">
@@ -134,7 +149,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, variant = 'default',
               </Link>
             </Button>
             <Link 
-              href={`/servicios#${service.id}`}
+              href={serviceUrl}
               className="text-sm text-primary hover:text-primary/80 font-medium flex items-center gap-1"
             >
               Ver más
@@ -194,7 +209,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, variant = 'default',
             className="w-full mt-4 gap-2 group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all duration-300"
             asChild
           >
-            <Link href={`/servicios#${service.id}`}>
+            <Link href={serviceUrl}>
               Más información
               <ArrowRight size={16} />
             </Link>
